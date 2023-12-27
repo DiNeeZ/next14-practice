@@ -18,7 +18,7 @@ const Navbar = () => {
             <div className="flex h-16 items-center">
               {/* TODO: Mobile nav */}
               <div className="ml-4 flex lg:ml-0">
-                <Link  href="/">
+                <Link href="/">
                   <Icons.logo className="h-10 w-10" />
                 </Link>
               </div>
@@ -30,22 +30,18 @@ const Navbar = () => {
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                   {!user && (
-                    <ProfileMenuLink href="/sign-in">Sign In</ProfileMenuLink>
-                  )}
-                  {!user && <NavDivider />}
-                  {user ? (
-                    <p></p>
-                  ) : (
-                    <ProfileMenuLink href="/sign-up">
-                      Create Account
-                    </ProfileMenuLink>
-                  )}
-                  {user && <NavDivider />}
-                  {!user && (
-                    <div className="flex lg:ml-6">
+                    <>
+                      <ProfileMenuLink href="/sign-in">Sign In</ProfileMenuLink>
                       <NavDivider />
-                    </div>
+                      <ProfileMenuLink href="/sign-up">
+                        Create Account
+                      </ProfileMenuLink>
+                    </>
                   )}
+
+                  {user && <p>PIC</p>}
+
+                  <NavDivider />
                   <div className="ml-4 flow-root">
                     <Cart />
                   </div>
