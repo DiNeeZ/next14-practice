@@ -40,8 +40,6 @@ export const getPayloadClient = async ({ initOptions }: Args = {}) => {
   } catch (error) {
     cached.promise = null;
 
-    throw new Error(
-      error instanceof Error ? error.message : "Something wrong was happend",
-    );
+    throw new Error((error as Error).message);
   }
 };
