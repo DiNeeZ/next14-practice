@@ -6,6 +6,8 @@ import NavDivider from "./nav-divider";
 import ProfileMenuLink from "./profile-menu-link";
 import { Icons } from "../icons";
 import Cart from "../cart";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "../ui/button";
 
 const Navbar = () => {
   const user = null;
@@ -18,7 +20,10 @@ const Navbar = () => {
             <div className="flex h-16 items-center">
               {/* TODO: Mobile nav */}
               <div className="ml-4 flex lg:ml-0">
-                <Link href="/">
+                <Link
+                  href="/"
+                  className={cn(buttonVariants({ variant: "link" }), "p-0")}
+                >
                   <Icons.logo className="h-10 w-10" />
                 </Link>
               </div>

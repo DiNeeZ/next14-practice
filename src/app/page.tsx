@@ -30,8 +30,8 @@ const Home = () => (
     <section>
       <MaxWidthWrapper>
         <div className="mx-auto flex max-w-3xl flex-col items-center py-20 text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl sm:leading-snug">
-            Your marketplace for hight-quality{" "}
+          <h1 className="px-6 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl sm:leading-snug">
+            Your marketplace for high-quality{" "}
             <span className="text-blue-600">digital assets</span>.
           </h1>
           <p className="mt-6 max-w-prose text-lg text-muted-foreground">

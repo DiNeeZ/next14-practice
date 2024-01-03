@@ -11,7 +11,7 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import { Separator } from "./ui/separator";
-import { formatPrice } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import Image from "next/image";
@@ -23,7 +23,10 @@ const Cart = () => {
 
   return (
     <Sheet>
-      <SheetTrigger aria-label="Open cart">
+      <SheetTrigger
+        className={cn(buttonVariants({ variant: "ghost" }), "p-2")}
+        aria-label="Open cart"
+      >
         <ShoppingCart
           aria-hidden="true"
           className="w-26 h-6 flex-shrink-0 text-gray-400"

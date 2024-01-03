@@ -1,14 +1,49 @@
 "use client";
 
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Label } from "@radix-ui/react-label";
+import { ArrowRight } from "lucide-react";
+
 import { Icons } from "@/components/icons";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { Label } from "@radix-ui/react-label";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import {
+  AuthCredentialsValidator,
+  TAuthCredentialsValidator,
+} from "@/lib/validators/account-credentials-validator";
+import { trpc } from "@/trpc/client";
+
+const errorMessages = {
+  emailError: "Email is incorrect",
+  passwordError: "Password is incorrect",
+  emailAndPasswordError: "Email and Password are incorrect",
+};
 
 const Page = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TAuthCredentialsValidator>({
+    resolver: zodResolver(AuthCredentialsValidator),
+  });
+
+  const getErrorMsg = () => {
+    if (errors.email && errors.password)
+      return errorMessages.emailAndPasswordError;
+    if (errors.email) return errorMessages.emailError;
+    if (errors.password) return errorMessages.passwordError;
+  };
+
+  const { mutate, isLoading } = trpc.auth.createPayloadUser.useMutation({});
+
+  const onSubmit = ({ email, password }: TAuthCredentialsValidator) => {
+    mutate({ email, password });
+  };
+
   return (
     <>
       <div className="container relative flex flex-col justify-center pt-20 lg:px-0">
@@ -30,26 +65,41 @@ const Page = () => {
           </div>
 
           <div className="grid gap-6">
-            <form onSubmit={() => {}}>
+            <form
+              className="flex flex-col gap-4"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div className="grid gap-1 py-2">
-                <Label htmlFor="email">Email</Label>
+                <Label className="mb-2" htmlFor="email">
+                  Email
+                </Label>
                 <Input
+                  {...register("email")}
                   className={cn({
-                    "focus-visible:ring-red-500": true,
+                    "focus-visible:ring-red-500": errors.email,
                   })}
                   placeholder="you@example.com"
                 />
               </div>
               <div className="grid gap-1 py-2">
-                <Label htmlFor="password">Password</Label>
+                <Label className="mb-2" htmlFor="password">
+                  Password
+                </Label>
                 <Input
+                  {...register("password")}
                   className={cn({
-                    "focus-visible:ring-red-500": true,
+                    "focus-visible:ring-red-500": errors.password,
                   })}
                   placeholder="password"
+                  type="password"
                 />
               </div>
               <Button>Sign Up</Button>
+              {!!Object.keys(errors).length && (
+                <h3 className="text-center text-xl font-bold text-red-500">
+                  {getErrorMsg()}
+                </h3>
+              )}
             </form>
           </div>
         </div>

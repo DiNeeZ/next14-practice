@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-import { PRODUCT_CATEGORIES } from "@/app/config";
+import { PRODUCT_CATEGORIES } from "@/config";
 import NavItem from "./nav-item";
-import { useOneClickOutside } from "@/app/hooks/use-on-click-outside";
+import { useOneClickOutside } from "@/hooks/use-on-click-outside";
 
 const NavItems = () => {
   const [activeIndex, setActiveIndex] = useState<null | number>(null);

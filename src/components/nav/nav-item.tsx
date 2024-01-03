@@ -2,7 +2,7 @@
 
 import { ChevronDown } from "lucide-react";
 import { Button } from "../ui/button";
-import { PRODUCT_CATEGORIES } from "@/app/config";
+import { PRODUCT_CATEGORIES } from "@/config";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -63,8 +63,9 @@ const NavItem = (props: NavItemProps) => {
                         <Image
                           src={item.imageSrc}
                           alt="product category image"
-                          fill
-                          className="object-cover object-center"
+                          width={768}
+                          height={432}
+                          className="h-auto object-cover object-center"
                         />
                       </div>
 
